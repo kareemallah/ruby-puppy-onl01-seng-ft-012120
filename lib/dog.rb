@@ -80,3 +80,5 @@ def initialize
 end 
 
 end 
+
+let!(:pluto) { Dog.new("Pluto")
