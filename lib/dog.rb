@@ -1,72 +1,82 @@
 # Add your code here
-class Shelter  
-  attr_accessor :name, :city
-  @@all = []
+class Owner
+OWNERS = [] 
+attr_accessor :name, :pets 
+attr_reader :species 
 
-  def initialize (name, city)
-    @name = name
-    @city = city
-    @dogs = [] 
-    @@all << self 
-  end 
-  
-  def add_dog(dog)
-    dog.shelter = self
-    @dogs << dog 
-  end 
-  
-  def dogs 
-    @dogs 
-  end 
-  
-  def self.all 
-    @@all
-  end 
+def initialize(species)
+  @species = species 
+  OWNERS << self 
+  @pets = {:fishes => [], :dogs => [], :cats => []}
 end 
 
-class Dog  
-  attr_accessor :name, :age, :breed, :shelter, :owner
-  @@all = []
-  
-  def initialize(name, age, breed)
-    @name = name
-    @age = age
-    @breed = breed 
-    @@all << self 
-  end 
-  
-  def self.all
-    @@all
-  end 
+def self.all ##Do we have to use this if we use a class variable? @@all 
+OWNERS 
 end 
 
+def self.reset_all 
+OWNERS.clear 
+end 
 
-class Owner # has many dogs 
-  attr_accessor :name, :age
-  attr_reader :dogs 
-  @@all = []
-  
-   def initialize (name, age)
-    @name = name
-    @age = age
-    @dogs = []
-    @shelters = []
-    @@all << self 
-  end 
-  
-  def add_dog(dog)
-    @dogs << dog 
-    dog.owner = self 
-  end 
-  
-  def shelters
-    self.dogs.each do |dog| 
-      @shelters << dog.shelter if dog.shelter
-    end 
-    @shelters
-  end
-  
-  def self.all 
-    @@all
-  end 
+def self.count
+OWNERS.size 
 end
+
+def species 
+  @species 
+end 
+
+def say_species 
+  return "I am a #{species}"
+end 
+  
+def name 
+  @name #where did we set @name = name? 
+end 
+
+def buy_fish(name)
+  pets[:fishes] << Fish.new(name) #how does owner.rb know where fish.rb is? 
+end 
+
+def buy_cat(name)
+  pets[:cats] << Cat.new(name)
+end 
+
+def buy_dog(name)
+  pets[:dogs] << Dog.new(name)
+end 
+
+def walk_dogs
+  pets[:dog].each do |dog|
+    dog.mood = "happy"
+  end 
+end 
+
+def play_with_cats
+  pets[:cats].each do |cat| 
+  cat.mood = "Happy"
+  end 
+end 
+
+def feed_fish
+  pets[:fish].each do |fish|
+  fish.mood = "happy"
+  end 
+end 
+
+def list_pets
+  "I have #{pets[:fishes].count} fish. I have #{pets[:cats].count} cats. I have #{pets[:dogs].count} dogs."
+end 
+
+end #finish Owner 
+
+class Fish 
+attr_reader :name 
+attr_accessor :mood 
+
+def initialize 
+  @name = name 
+  @mood = "nervous"
+end 
+
+end 
