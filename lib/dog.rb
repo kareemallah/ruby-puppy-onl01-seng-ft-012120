@@ -10,7 +10,7 @@ def initialize(species)
   @pets = {:fishes => [], :dogs => [], :cats => []}
 end 
 
-def self.all ## @@all 
+def self.all ##Do we have to use this if we use a class variable? @@all 
 OWNERS 
 end 
 
